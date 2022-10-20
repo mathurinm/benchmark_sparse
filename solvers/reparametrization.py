@@ -20,6 +20,7 @@ class Solver(BaseSolver):
     def run(self, n_iter):
         X, y, lmbd = self.X, self.y, self.lmbd
 
+        # least_squares will minimize norm of func(w)
         def func(w):
             return np.hstack((
                 X.dot(w**3) - y,

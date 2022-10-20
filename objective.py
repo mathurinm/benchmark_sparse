@@ -11,8 +11,8 @@ class Objective(BaseObjective):
 
     # All parameters 'p' defined here are available as 'self.p'
     parameters = {
-        # 'reg': [0.5, 0.1, 0.01],
-        'reg': [0.5],
+        'reg': [0.5, 0.1, 0.01],
+        # 'reg': [0.5],
     }
 
     def get_one_solution(self):
