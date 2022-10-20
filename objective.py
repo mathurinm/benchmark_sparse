@@ -11,7 +11,7 @@ class Objective(BaseObjective):
 
     # All parameters 'p' defined here are available as 'self.p'
     parameters = {
-        'fit_intercept': [False],
+        'reg': [0.5, 0.1, 0.01],
     }
 
     def get_one_solution(self):
@@ -23,16 +23,17 @@ class Objective(BaseObjective):
         # dict in the `get_data` function of the dataset.
         # They are customizable.
         self.X, self.y = X, y
+        self.lmb = self.reg * np.linalg.norm(X.T @ y, ord=np.inf)
 
     def compute(self, beta):
         # The arguments of this function are the outputs of the
         # `get_result` method of the solver.
         # They are customizable.
         diff = self.y - self.X.dot(beta)
-        return .5 * diff.dot(diff)
+        return .5 * diff.dot(diff) + np.sum(np.abs(beta) ** 1 / 3)
 
     def to_dict(self):
         # The output of this function are the keyword arguments
         # for the `set_objective` method of the solver.
         # They are customizable.
-        return dict(X=self.X, y=self.y, fit_intercept=self.fit_intercept)
+        return dict(X=self.X, y=self.y, lmbd=self.lmbd)
