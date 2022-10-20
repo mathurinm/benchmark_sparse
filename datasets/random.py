@@ -12,7 +12,8 @@ class Dataset(BaseDataset):
     parameters = {
         'n_samples, n_features': [
             (100, 200),
-            (200, 100)]
+            # (200, 100),
+        ]
     }
 
     def __init__(

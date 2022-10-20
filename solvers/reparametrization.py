@@ -18,18 +18,18 @@ class Solver(BaseSolver):
         self.lmbd = lmbd
 
     def run(self, n_iter):
-        X, y = self.X, self.y
+        X, y, lmbd = self.X, self.y, self.lmbd
 
         def func(w):
             return np.hstack((
                 X.dot(w**3) - y,
-                np.sqrt(self.lam) * w
+                np.sqrt(lmbd) * w,
             ))
 
         def dfunc(w):
             return np.vstack((
                 3 * X * w[None, :]**2,
-                np.sqrt(self.lam) * np.eye(len(w))
+                np.sqrt(lmbd) * np.eye(len(w)),
             ))
 
         x0 = np.linalg.lstsq(X, y, rcond=None)[0]
