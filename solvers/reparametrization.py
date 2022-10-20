@@ -20,23 +20,23 @@ class Solver(BaseSolver):
     def run(self, n_iter):
         X, y = self.X, self.y
 
-        def func(y):
+        def func(w):
             return np.hstack((
-                X.dot(y**3) - y,
-                np.sqrt(self.lam) * y
+                X.dot(w**3) - y,
+                np.sqrt(self.lam) * w
             ))
 
-        def dfunc(y):
+        def dfunc(w):
             return np.vstack((
-                3 * X * y[None, :]**2,
-                np.sqrt(self.lam) * np.eye(len(y))
+                3 * X * w[None, :]**2,
+                np.sqrt(self.lam) * np.eye(len(w))
             ))
 
         x0 = np.linalg.lstsq(X, y, rcond=None)[0]
         results = least_squares(
             func, np.abs(x0)**(1/3) * np.sign(x0), jac=dfunc,
             method='lm',
-            max_nfev=n_iter,
+            max_nfev=n_iter + 1,
             verbose=1,
         )
 

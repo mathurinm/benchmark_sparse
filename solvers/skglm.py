@@ -17,7 +17,7 @@ class Solver(BaseSolver):
     def run(self, n_iter):
         model = skglm.GeneralizedLinearEstimator(
             datafit=skglm.datafits.Quadratic(),
-            penalty=skglm.penalties.L2_3(self.lmb / len(self.y)),
+            penalty=skglm.penalties.L2_3(self.lmbd / len(self.y)),
             solver=skglm.solvers.AndersonCD(
                 tol=1e-14,
                 max_iter=n_iter,

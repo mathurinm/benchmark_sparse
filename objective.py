@@ -11,7 +11,8 @@ class Objective(BaseObjective):
 
     # All parameters 'p' defined here are available as 'self.p'
     parameters = {
-        'reg': [0.5, 0.1, 0.01],
+        # 'reg': [0.5, 0.1, 0.01],
+        'reg': [0.5],
     }
 
     def get_one_solution(self):
@@ -23,7 +24,7 @@ class Objective(BaseObjective):
         # dict in the `get_data` function of the dataset.
         # They are customizable.
         self.X, self.y = X, y
-        self.lmb = self.reg * np.linalg.norm(X.T @ y, ord=np.inf)
+        self.lmbd = self.reg * np.linalg.norm(X.T @ y, ord=np.inf)
 
     def compute(self, beta):
         # The arguments of this function are the outputs of the
