@@ -11,9 +11,10 @@ class Dataset(BaseDataset):
     # the cross product for each key in the dictionary.
     parameters = {
         'n_samples, n_features': [
-            (100, 200),
+            (1000, 2000),
             # (200, 100),
-        ]
+        ],
+        'ill_conditioned': [False],
     }
 
     def __init__(
@@ -31,8 +32,9 @@ class Dataset(BaseDataset):
         X = rng.randn(self.n_samples, self.n_features)
         y = rng.randn(self.n_samples)
 
-        # TODO probably can save SVD by just having random orthonormal U and V
-        U, s, VT = np.linalg.svd(X, full_matrices=False)
-        X = np.dot(U * np.exp(-np.linspace(0, 10, len(s))), VT)
+        if self.ill_conditioned:
+            # TODO can save SVD by just having random orthonormal U and V
+            U, s, VT = np.linalg.svd(X, full_matrices=False)
+            X = np.dot(U * np.exp(-np.linspace(0, 10, len(s))), VT)
 
         return dict(X=X, y=y)

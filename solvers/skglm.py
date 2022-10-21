@@ -8,6 +8,8 @@ with safe_import_context() as ctx:
 class Solver(BaseSolver):
     name = 'skglm'
 
+    stopping_strategy = 'iteration'
+
     def set_objective(self, X, y, lmbd):
         self.X, self.y = X, y
         self.lmbd = lmbd
@@ -32,3 +34,7 @@ class Solver(BaseSolver):
 
     def get_result(self):
         return self.w
+
+    @staticmethod
+    def get_next(n_iter):
+        return n_iter + 1
