@@ -7,7 +7,7 @@ with safe_import_context() as import_ctx:
 
 
 class Objective(BaseObjective):
-    name = "Ordinary Least Squares"
+    name = "Lq least squares"
 
     # All parameters 'p' defined here are available as 'self.p'
     parameters = {
