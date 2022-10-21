@@ -31,7 +31,9 @@ class Objective(BaseObjective):
         # `get_result` method of the solver.
         # They are customizable.
         diff = self.y - self.X.dot(beta)
-        objective = .5 * diff.dot(diff) + self.lmbd * np.sum(np.abs(beta) ** (2 / 3))
+        objective = (
+            .5 * diff.dot(diff) + self.lmbd * np.sum(np.abs(beta) ** (2 / 3))
+        )
 
         return dict(value=objective, sparsity=(beta != 0).sum())
 
