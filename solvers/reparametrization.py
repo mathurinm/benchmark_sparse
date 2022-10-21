@@ -23,13 +23,13 @@ class Solver(BaseSolver):
         # least_squares will minimize norm of func(w)
         def func(w):
             return np.hstack((
-                X.dot(w**3) - y,
+                (X.dot(w**3) - y) / np.sqrt(2),
                 np.sqrt(lmbd) * w,
             ))
 
         def dfunc(w):
             return np.vstack((
-                3 * X * w[None, :]**2,
+                (3 * X * w[None, :]**2) / np.sqrt(2),
                 np.sqrt(lmbd) * np.eye(len(w)),
             ))
 
@@ -44,4 +44,7 @@ class Solver(BaseSolver):
         self.w = results.x ** 3
 
     def get_result(self):
-        return self.w
+        w = self.w
+        # impose sparsity for small coefs
+        w[np.abs(w) < 1e-10] = 0
+        return w
