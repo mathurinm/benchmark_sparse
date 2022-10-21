@@ -44,4 +44,7 @@ class Solver(BaseSolver):
         self.w = results.x ** 3
 
     def get_result(self):
-        return self.w
+        w = self.w
+        # impose sparsity for small coefs
+        w[np.abs(w) < 1e-10] = 0
+        return w
