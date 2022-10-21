@@ -5,10 +5,10 @@ Benchopt for Lq least squares
 
 Benchopt is a package to simplify and make more transparent and
 reproducible the comparisons of optimization algorithms.
-This benchmark is dedicated to solver of Lq least squares:
+This benchmark is dedicated to solving Lq regularized least squares:
 
 
-$$\\min_{w} \\frac{1}{2} \\Vert y - Xw \\Vert^2 + \\lambda \\sum_1^p |w_j| q$$
+$$\\min_{w} \\frac{1}{2} \\Vert y - Xw \\Vert^2 + \\lambda \\sum_1^p |w_j|^q$$
 
 
 where $q = 2/3$ for now, $n$ (or ``n_samples``) stands for the number of samples, $p$ (or ``n_features``) stands for the number of features and
