@@ -5,7 +5,7 @@ from benchopt import BaseDataset
 
 class Dataset(BaseDataset):
 
-    name = "random"
+    name = "simulated"
 
     # List of parameters to generate the datasets. The benchmark will consider
     # the cross product for each key in the dictionary.
