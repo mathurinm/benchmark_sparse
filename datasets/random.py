@@ -13,7 +13,7 @@ class Dataset(BaseDataset):
         "n_samples, n_features": [
             (1000, 2000),
         ],
-        "ill_conditioned": [True],
+        "ill_conditioned": [False, True],
     }
 
     def __init__(
