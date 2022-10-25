@@ -8,6 +8,8 @@ with safe_import_context() as ctx:
 class Solver(BaseSolver):
     name = 'skglm'
 
+    requirements = ['pip:skglm']
+
     stopping_criterion = SufficientProgressCriterion(
             eps=1e-12, patience=15, strategy='iteration')
 
