@@ -1,5 +1,5 @@
 from benchopt import BaseSolver, safe_import_context
-
+from benchopt.stopping_criterion import SufficientProgressCriterion
 
 with safe_import_context() as ctx:
     import skglm
@@ -8,7 +8,8 @@ with safe_import_context() as ctx:
 class Solver(BaseSolver):
     name = 'skglm'
 
-    stopping_strategy = 'iteration'
+    stopping_criterion = SufficientProgressCriterion(
+            eps=1e-12, patience=15, strategy='iteration')
 
     def set_objective(self, X, y, lmbd):
         self.X, self.y = X, y
